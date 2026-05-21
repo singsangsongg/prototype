@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>견적 만들기 · Brand A</title>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../vendor/tabler/tabler-icons.min.css">
+<style>
+  .agent-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1rem 1.1rem;
+    transition: all 0.2s ease;
+  }
+  .agent-card[data-on="true"] {
+    border-color: var(--color-border-info);
+    background: var(--color-background-info);
+  }
+  .agent-card[data-on="false"][data-recommended="true"] {
+    border-style: dashed;
+  }
+  .toggle {
+    position: relative;
+    width: 36px; height: 20px;
+    background: var(--color-border-tertiary);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border: none;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .toggle::after {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 16px; height: 16px;
+    background: var(--color-background-primary);
+    border-radius: 50%;
+    transition: left 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+  .toggle[data-on="true"] { background: var(--color-text-info); }
+  .toggle[data-on="true"]::after { left: 18px; }
+  .toggle:hover { opacity: 1; }
+
+  .impact-bar {
+    height: 3px;
+    background: var(--color-background-secondary);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .impact-bar > div {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    background: var(--color-text-info);
+    transition: width 0.4s ease;
+  }
+</style>
+</head>
+<body>
+
+<header class="proto-header">
+  <div class="crumb">
+    <span>무료 진단</span>
+    <span class="dot"></span>
+    <span>계정 연결</span>
+    <span class="dot"></span>
+    <span class="current">견적</span>
+  </div>
+  <nav class="nav">
+    <a href="screen-1-free.html">1 · 무료 진단</a>
+    <a href="screen-2-connected.html">2 · 전체 진단</a>
+    <a href="screen-3-quote.html" class="active">3 · 견적</a>
+  </nav>
+</header>
+
+<main class="canvas">
+<h2 class="sr-only">처방을 켜고 끄며 견적과 예상 임팩트를 실시간으로 확인할 수 있는 인터랙티브 화면.</h2>
+
+<div style="margin: 0 0 1.25rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--color-border-tertiary);">
+  <h1 style="font-family: var(--font-serif); font-size: 26px; font-weight: 500; margin: 0 0 4px; color: var(--color-text-primary); line-height: 1.2;">처방을 조합해보세요</h1>
+  <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">
+    Brand A의 병목 분석 기반 추천. 켜고 끄면서 자유롭게 조합하세요 — 우측 패널이 실시간으로 임팩트를 보여줍니다.
+  </p>
+</div>
+
+<div style="display: grid; grid-template-columns: 1fr 280px; gap: 20px; align-items: flex-start;">
+
+  <!-- LEFT -->
+  <div>
+    <div style="margin: 0 0 1.25rem;">
+      <div style="display: flex; align-items: center; gap: 8px; margin: 0 0 10px;">
+        <span style="font-size: 11px; letter-spacing: 0.1em; color: var(--color-text-tertiary); font-weight: 500;">병목 분석 기반 추천 · 3</span>
+        <i class="ti ti-sparkles" style="font-size: 13px; color: var(--color-text-info);" aria-hidden="true"></i>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+
+        <div class="agent-card" data-on="true" data-recommended="true" data-impact="180" data-price-min="380" data-price-max="640" data-id="seeding">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
+              <i class="ti ti-seedling" style="font-size: 18px; color: var(--color-text-info);" aria-hidden="true"></i>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 8px; margin: 0 0 2px;">
+                <span style="font-family: var(--font-serif); font-size: 17px; font-weight: 500; color: var(--color-text-primary);">Seeding Agent</span>
+                <span style="font-size: 10px; padding: 2px 7px; background: var(--color-background-info); color: var(--color-text-info); border-radius: 999px; font-weight: 500;">1순위</span>
+              </div>
+              <p style="font-size: 12.5px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">TikTok·Meta 인플루언서 매칭 · 후행지표 검증 프레임</p>
+            </div>
+            <div style="text-align: right; flex-shrink: 0;">
+              <div style="font-family: var(--font-serif); font-size: 16px; font-weight: 500; color: var(--color-text-info); line-height: 1;">+$180K</div>
+              <div style="font-size: 10px; color: var(--color-text-tertiary); margin-top: 2px;">예상 임팩트</div>
+            </div>
+            <button class="toggle" data-on="true" data-id="seeding" aria-label="Seeding Agent on/off"></button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary);">
+            <span style="font-size: 11px; color: var(--color-text-tertiary); flex: 1;">병목 1·3순위 동시 해결 · 인플루언서 매칭 풀 ~2,400</span>
+            <span style="font-size: 11px; color: var(--color-text-secondary);">From <strong style="font-weight: 500; color: var(--color-text-primary);">₩380K / 월</strong></span>
+          </div>
+        </div>
+
+        <div class="agent-card" data-on="true" data-recommended="true" data-impact="32" data-price-min="180" data-price-max="320" data-id="dsp">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
+              <i class="ti ti-users" style="font-size: 18px; color: var(--color-text-info);" aria-hidden="true"></i>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 8px; margin: 0 0 2px;">
+                <span style="font-family: var(--font-serif); font-size: 17px; font-weight: 500; color: var(--color-text-primary);">DSP Audience</span>
+                <span style="font-size: 10px; padding: 2px 7px; background: var(--color-background-secondary); color: var(--color-text-secondary); border-radius: 999px; font-weight: 500;">2순위</span>
+              </div>
+              <p style="font-size: 12.5px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">PDP 미구매자 41K 리타겟팅 · 외부 트래픽 회수</p>
+            </div>
+            <div style="text-align: right; flex-shrink: 0;">
+              <div style="font-family: var(--font-serif); font-size: 16px; font-weight: 500; color: var(--color-text-info); line-height: 1;">+$32K</div>
+              <div style="font-size: 10px; color: var(--color-text-tertiary); margin-top: 2px;">예상 임팩트</div>
+            </div>
+            <button class="toggle" data-on="true" data-id="dsp" aria-label="DSP Audience on/off"></button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary);">
+            <span style="font-size: 11px; color: var(--color-text-tertiary); flex: 1;">병목 3순위 해결 · ASIN viewer + lookalike audience</span>
+            <span style="font-size: 11px; color: var(--color-text-secondary);">From <strong style="font-weight: 500; color: var(--color-text-primary);">₩180K / 월</strong></span>
+          </div>
+        </div>
+
+        <div class="agent-card" data-on="false" data-recommended="true" data-impact="18" data-price-min="120" data-price-max="220" data-id="creative">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
+              <i class="ti ti-wand" style="font-size: 18px; color: var(--color-text-secondary);" aria-hidden="true"></i>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 8px; margin: 0 0 2px;">
+                <span style="font-family: var(--font-serif); font-size: 17px; font-weight: 500; color: var(--color-text-primary);">Creative Audit</span>
+                <span style="font-size: 10px; padding: 2px 7px; background: var(--color-background-secondary); color: var(--color-text-secondary); border-radius: 999px; font-weight: 500;">3순위</span>
+              </div>
+              <p style="font-size: 12.5px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">A+ cannibalization 자동 탐지 · PDP 비교표 재구성</p>
+            </div>
+            <div style="text-align: right; flex-shrink: 0;">
+              <div style="font-family: var(--font-serif); font-size: 16px; font-weight: 500; color: var(--color-text-secondary); line-height: 1;">+$18K</div>
+              <div style="font-size: 10px; color: var(--color-text-tertiary); margin-top: 2px;">예상 임팩트</div>
+            </div>
+            <button class="toggle" data-on="false" data-id="creative" aria-label="Creative Audit on/off"></button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary);">
+            <span style="font-size: 11px; color: var(--color-text-tertiary); flex: 1;">병목 2순위 해결 · 자기 잠식 ASIN 자동 식별</span>
+            <span style="font-size: 11px; color: var(--color-text-secondary);">From <strong style="font-weight: 500; color: var(--color-text-primary);">₩120K / 월</strong></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div style="display: flex; align-items: center; gap: 8px; margin: 0 0 10px;">
+        <span style="font-size: 11px; letter-spacing: 0.1em; color: var(--color-text-tertiary); font-weight: 500;">추가 Agent · 3</span>
+        <span style="font-size: 11px; color: var(--color-text-tertiary); font-style: italic;">현재 단계에선 우선순위 낮음</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+
+        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0" data-price-min="240" data-price-max="420" data-id="amc">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
+              <i class="ti ti-target" style="font-size: 16px; color: var(--color-text-secondary);" aria-hidden="true"></i>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-family: var(--font-serif); font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px;">AMC Insight</div>
+              <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">자연어 질의 · custom audience · 도달 미달 분석</p>
+            </div>
+            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">From ₩240K</span>
+            <button class="toggle" data-on="false" data-id="amc" aria-label="AMC Insight on/off"></button>
+          </div>
+        </div>
+
+        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0" data-price-min="160" data-price-max="280" data-id="rtb">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
+              <i class="ti ti-bolt" style="font-size: 16px; color: var(--color-text-secondary);" aria-hidden="true"></i>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-family: var(--font-serif); font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px;">SA RTB</div>
+              <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">Sponsored Ads bid · budget · keyword 자동화</p>
+            </div>
+            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">From ₩160K</span>
+            <button class="toggle" data-on="false" data-id="rtb" aria-label="SA RTB on/off"></button>
+          </div>
+        </div>
+
+        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0" data-price-min="300" data-price-max="500" data-id="designer">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
+              <i class="ti ti-layout-grid" style="font-size: 16px; color: var(--color-text-secondary);" aria-hidden="true"></i>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-family: var(--font-serif); font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px;">Campaign Designer</div>
+              <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">캠페인 구조 재설계 · 신규 ASIN 런칭</p>
+            </div>
+            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">From ₩300K</span>
+            <button class="toggle" data-on="false" data-id="designer" aria-label="Campaign Designer on/off"></button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT panel -->
+  <aside style="position: sticky; top: 12px;">
+    <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1.25rem 1.25rem 1.1rem;">
+      <div style="font-size: 11px; letter-spacing: 0.1em; color: var(--color-text-tertiary); font-weight: 500; margin: 0 0 12px;">YOUR QUOTE</div>
+      <div style="margin: 0 0 1rem;">
+        <div style="font-size: 12px; color: var(--color-text-secondary); margin: 0 0 4px;">예상 월 매출 임팩트</div>
+        <div style="font-family: var(--font-serif); font-size: 32px; font-weight: 500; color: var(--color-text-info); line-height: 1;" id="total-impact">+$212K</div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 6px;" id="impact-vs-gap">목표 갭의 <span style="color: var(--color-text-primary); font-weight: 500;">87%</span> 회수</div>
+        <div class="impact-bar" style="margin-top: 6px;"><div id="impact-fill" style="width: 87%;"></div></div>
+      </div>
+      <div style="padding-top: 0.85rem; margin-top: 0.85rem; border-top: 0.5px solid var(--color-border-tertiary);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 0 0 6px;">
+          <span style="font-size: 12px; color: var(--color-text-secondary);">선택한 Agent</span>
+          <span style="font-size: 12px; color: var(--color-text-primary); font-weight: 500;" id="agent-count">2개</span>
+        </div>
+        <div id="selected-list" style="display: flex; flex-direction: column; gap: 4px; margin: 0 0 12px;"></div>
+      </div>
+      <div style="padding-top: 0.85rem; margin-top: 0.85rem; border-top: 0.5px solid var(--color-border-tertiary);">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 4px;">
+          <span style="font-size: 13px; color: var(--color-text-primary); font-weight: 500;">월 견적</span>
+          <span style="font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: var(--color-text-primary);" id="quote-range">₩560K~960K</span>
+        </div>
+        <div style="font-size: 11px; color: var(--color-text-tertiary); line-height: 1.4;">
+          최종 가격은 PSM 상담 후 확정됩니다. 광고비 % 옵션도 가능.
+        </div>
+      </div>
+      <button id="psm-btn" style="width: 100%; margin-top: 1rem; padding: 11px; font-size: 13px; font-weight: 500;">PSM 상담 받기 →</button>
+      <div style="display: flex; align-items: center; gap: 6px; margin-top: 10px;">
+        <i class="ti ti-clock" style="font-size: 12px; color: var(--color-text-tertiary);" aria-hidden="true"></i>
+        <span style="font-size: 11px; color: var(--color-text-tertiary);">평균 응답 시간 4시간 · 평일 한국 기준</span>
+      </div>
+    </div>
+    <div style="margin-top: 12px; padding: 10px 12px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md);">
+      <div style="display: flex; align-items: flex-start; gap: 8px;">
+        <i class="ti ti-info-circle" style="font-size: 14px; color: var(--color-text-secondary); margin-top: 2px;" aria-hidden="true"></i>
+        <p style="font-size: 11px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">
+          견적은 견적일 뿐 결제가 아닙니다. 상담 후 서비스 범위를 같이 확정합니다.
+        </p>
+      </div>
+    </div>
+  </aside>
+</div>
+
+</main>
+
+<footer class="proto-footer">
+  Prototype · for internal team alignment only · 실제 데이터·UI 아님
+</footer>
+
+<script>
+  const cards = document.querySelectorAll('.agent-card');
+  const toggles = document.querySelectorAll('.toggle');
+  const labels = {
+    seeding: 'Seeding Agent', dsp: 'DSP Audience', creative: 'Creative Audit',
+    amc: 'AMC Insight', rtb: 'SA RTB', designer: 'Campaign Designer'
+  };
+  const targetGap = 243;
+
+  function update() {
+    let totalImpact = 0, priceMin = 0, priceMax = 0;
+    const selected = [];
+    cards.forEach(card => {
+      const on = card.dataset.on === 'true';
+      if (on) {
+        totalImpact += parseFloat(card.dataset.impact);
+        priceMin += parseFloat(card.dataset.priceMin);
+        priceMax += parseFloat(card.dataset.priceMax);
+        selected.push(card.dataset.id);
+      }
+    });
+    document.getElementById('total-impact').textContent = totalImpact > 0 ? `+$${totalImpact}K` : '—';
+    const pct = Math.min(100, Math.round((totalImpact / targetGap) * 100));
+    document.getElementById('impact-fill').style.width = pct + '%';
+    document.getElementById('impact-vs-gap').innerHTML = totalImpact > 0
+      ? `목표 갭의 <span style="color: var(--color-text-primary); font-weight: 500;">${pct}%</span> 회수`
+      : `처방을 켜면 임팩트가 표시됩니다`;
+    document.getElementById('agent-count').textContent = selected.length + '개';
+    const list = document.getElementById('selected-list');
+    if (selected.length === 0) {
+      list.innerHTML = '<div style="font-size: 12px; color: var(--color-text-tertiary); font-style: italic;">아직 선택된 Agent 없음</div>';
+    } else {
+      list.innerHTML = selected.map(id =>
+        `<div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-primary);">
+          <i class="ti ti-check" style="font-size: 12px; color: var(--color-text-info);" aria-hidden="true"></i>
+          ${labels[id]}
+        </div>`).join('');
+    }
+    document.getElementById('quote-range').textContent = selected.length === 0 ? '—' : `₩${priceMin}K~${priceMax}K`;
+  }
+
+  toggles.forEach(t => {
+    t.addEventListener('click', () => {
+      const id = t.dataset.id;
+      const newOn = t.dataset.on !== 'true';
+      t.dataset.on = newOn;
+      document.querySelector(`.agent-card[data-id="${id}"]`).dataset.on = newOn;
+      update();
+    });
+  });
+
+  document.getElementById('psm-btn').addEventListener('click', () => {
+    alert('PSM 상담 요청 (prototype — 실제 기능 아님)');
+  });
+
+  update();
+</script>
+
+</body>
+</html>

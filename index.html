@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategy Prototype · Team Align</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="vendor/tabler/tabler-icons.min.css">
+<style>
+  .hero {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 80px 32px 40px;
+  }
+  .hero .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; letter-spacing: 0.1em;
+    color: var(--color-text-info); font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+  }
+  .hero h1 .italic { font-style: italic; color: var(--color-text-info); }
+  .hero p {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 540px;
+    margin: 24px 0 0;
+  }
+
+  .screens {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .screen-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .screen-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .screen-card .visual {
+    height: 140px;
+    background: var(--color-background-secondary);
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  .screen-card .visual i { font-size: 36px; color: var(--color-text-info); }
+  .screen-card .body {
+    padding: 18px 20px;
+  }
+  .screen-card .num {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .screen-card .title {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 6px;
+    color: var(--color-text-primary);
+  }
+  .screen-card .desc {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    margin: 0 0 12px;
+  }
+  .screen-card .meta {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .note {
+    max-width: 920px;
+    margin: 0 auto 80px;
+    padding: 24px 32px;
+  }
+  .note .box {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: 20px 24px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+  .note .box strong { color: var(--color-text-primary); font-weight: 500; }
+
+  @media (max-width: 720px) {
+    .screens { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="tag">
+    <span style="display: inline-block; width: 16px; height: 2px; background: var(--color-text-info);"></span>
+    TEAM · ALIGN · PROTOTYPE
+  </div>
+  <h1>Selling outcomes,</h1>
+  <h1 class="italic">not services.</h1>
+  <p>
+    전략 deck에서 추상적으로 다룬 "Three-Layer Model"을 실제 고객 화면으로 옮기면 어떤 모습이 되는지 보여주는 prototype입니다. 직접 만지면서 보세요.
+  </p>
+</section>
+
+<section class="screens">
+  <a class="screen-card" href="screens/screen-1-free.html">
+    <div class="visual"><i class="ti ti-lock" aria-hidden="true"></i></div>
+    <div class="body">
+      <div class="num">01 · FREEMIUM ENTRY</div>
+      <div class="title">무료 진단</div>
+      <div class="desc">계정 연결 전, 공개 데이터로 본 진단. 가린 영역이 계정 연결을 유도합니다.</div>
+      <div class="meta">
+        <i class="ti ti-arrow-right" style="font-size: 12px;" aria-hidden="true"></i>
+        Connect Account를 눌러 다음 화면으로
+      </div>
+    </div>
+  </a>
+
+  <a class="screen-card" href="screens/screen-2-connected.html">
+    <div class="visual"><i class="ti ti-lock-open" aria-hidden="true"></i></div>
+    <div class="body">
+      <div class="num">02 · UNLOCKED</div>
+      <div class="title">전체 진단</div>
+      <div class="desc">계정 연결 후 5개 영역이 열린 모습. ROAS·병목 2·3순위·임팩트 예측이 등장합니다.</div>
+      <div class="meta">
+        <i class="ti ti-arrow-right" style="font-size: 12px;" aria-hidden="true"></i>
+        견적 만들기로 진행
+      </div>
+    </div>
+  </a>
+
+  <a class="screen-card" href="screens/screen-3-quote.html">
+    <div class="visual"><i class="ti ti-adjustments" aria-hidden="true"></i></div>
+    <div class="body">
+      <div class="num">03 · INTERACTIVE</div>
+      <div class="title">견적 만들기</div>
+      <div class="desc">Agent를 켜고 끄면서 견적과 임팩트가 실시간으로 변합니다. 결제 직전 단계.</div>
+      <div class="meta">
+        <i class="ti ti-pointer" style="font-size: 12px;" aria-hidden="true"></i>
+        토글을 직접 켜고 꺼보세요
+      </div>
+    </div>
+  </a>
+</section>
+
+<section class="note">
+  <div class="box">
+    <strong>읽기 전에:</strong> 이 prototype은 사업 전략을 시각화하기 위한 가상의 화면입니다. 실제 데이터·실제 제품·실제 가격이 아닙니다. Brand A는 한국 → 미국 K-Beauty 셀러의 전형적 패턴을 익명화한 가상의 케이스입니다. 화면에 표시된 숫자는 모두 placeholder입니다.
+    <br><br>
+    <strong>같이 보면 좋은 자료:</strong> 전체 사업 전략은 별도 deck에 정리되어 있습니다. Deck → Prototype 순서로 보면 추상에서 구체로 자연스럽게 이어집니다.
+    <div style="display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;">
+      <a href="Strategy_Deck.pdf" download style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; text-decoration: none; color: var(--color-text-primary); padding: 8px 14px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md);">
+        <i class="ti ti-file-type-pdf" style="font-size: 16px;" aria-hidden="true"></i>
+        Strategy Deck (PDF)
+      </a>
+      <a href="Strategy_Deck.pptx" download style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; text-decoration: none; color: var(--color-text-primary); padding: 8px 14px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md);">
+        <i class="ti ti-presentation" style="font-size: 16px;" aria-hidden="true"></i>
+        Strategy Deck (PPTX · 수정 가능)
+      </a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
