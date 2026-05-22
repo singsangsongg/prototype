@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가격 비교 · v2 Prototype</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../vendor/tabler/tabler-icons.min.css">
+<style>
+  .canvas { max-width: 920px; margin: 0 auto; padding: 40px 32px; }
+  .proto-header {
+    max-width: 920px; margin: 0 auto;
+    padding: 20px 32px; display: flex;
+    justify-content: space-between; align-items: center;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  .crumb { font-size: 12px; color: var(--color-text-tertiary); display: flex; align-items: center; gap: 8px; }
+  .crumb .dot { width: 3px; height: 3px; background: var(--color-text-tertiary); border-radius: 50%; }
+  .crumb .current { color: var(--color-text-primary); font-weight: 500; }
+  .nav { display: flex; gap: 6px; }
+  .nav a {
+    font-size: 12px; padding: 6px 12px;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    text-decoration: none; color: var(--color-text-secondary);
+  }
+  .nav a.active {
+    background: var(--color-text-primary); color: var(--color-background-primary);
+    border-color: var(--color-text-primary);
+  }
+
+  h1 { font-family: var(--font-serif); font-size: 32px; font-weight: 500; margin: 0 0 8px; }
+  h1 .v { font-size: 14px; color: var(--color-text-info); font-weight: 500; vertical-align: super; }
+  .subtitle { font-size: 14px; color: var(--color-text-secondary); margin: 0 0 32px; line-height: 1.5; }
+
+  .tier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .tier-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: 24px 24px 22px;
+    position: relative;
+  }
+  .tier-card.selected {
+    border-color: var(--color-text-info);
+    border-width: 1.5px;
+    box-shadow: 0 4px 16px rgba(99, 91, 255, 0.08);
+  }
+  .tier-card .tier-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+    margin: 0 0 4px;
+  }
+  .tier-card.selected .tier-label { color: var(--color-text-info); }
+  .tier-card h2 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: var(--color-text-primary);
+  }
+  .tier-card .segment {
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+    margin: 0 0 18px;
+  }
+  .tier-card .price-headline {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1;
+    margin: 0 0 4px;
+  }
+  .tier-card .price-headline .unit {
+    font-size: 14px; color: var(--color-text-tertiary); font-weight: 400;
+  }
+  .tier-card .price-sub {
+    font-size: 12px;
+    color: var(--color-text-info);
+    font-weight: 500;
+    margin: 0 0 18px;
+  }
+  .tier-card .features {
+    padding-top: 16px;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .tier-card .feat {
+    display: flex; gap: 8px;
+    font-size: 12.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+  .tier-card .feat i {
+    flex-shrink: 0;
+    font-size: 13px;
+    color: var(--color-text-info);
+    margin-top: 1px;
+  }
+  .tier-card .feat strong { color: var(--color-text-primary); font-weight: 500; }
+  .tier-card .ribbon {
+    position: absolute;
+    top: -8px; right: 18px;
+    background: var(--color-text-info);
+    color: var(--color-background-primary);
+    font-size: 10.5px; letter-spacing: 0.04em;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  /* Spend slider */
+  .spend-input-wrap {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: 14px 16px;
+    margin: 0 0 24px;
+  }
+  .spend-input-wrap label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+  .spend-controls {
+    display: flex; align-items: center; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .spend-controls > div {
+    display: flex; align-items: baseline; gap: 6px;
+  }
+  .spend-prefix {
+    font-family: var(--font-serif);
+    font-size: 22px; font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .spend-controls input[type="range"] {
+    flex: 1; min-width: 200px;
+    accent-color: var(--color-text-info);
+  }
+  .spend-preset {
+    display: flex; gap: 4px;
+  }
+  .spend-preset button {
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+  }
+  .spend-preset button.active {
+    background: var(--color-text-info);
+    color: var(--color-background-primary);
+    border-color: var(--color-text-info);
+  }
+
+  /* Industry comparison table */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0 0;
+    font-size: 12.5px;
+  }
+  .compare-table th {
+    text-align: left; font-size: 11px;
+    letter-spacing: 0.05em; font-weight: 500;
+    color: var(--color-text-tertiary);
+    border-bottom: 0.5px solid var(--color-border-secondary);
+    padding: 8px 10px;
+  }
+  .compare-table td {
+    padding: 10px 10px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+  }
+  .compare-table tr.us td {
+    color: var(--color-text-primary); font-weight: 500;
+    background: var(--color-background-info);
+  }
+  .compare-table tr.us td:first-child { border-radius: 4px 0 0 4px; }
+  .compare-table tr.us td:last-child { border-radius: 0 4px 4px 0; }
+
+  .callout {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 14px 16px;
+    margin: 24px 0 0;
+    font-size: 12.5px; line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+  .callout strong { color: var(--color-text-primary); font-weight: 500; }
+
+  .proto-footer {
+    max-width: 920px; margin: 60px auto 40px;
+    padding: 20px 32px; text-align: center;
+    font-size: 11px; color: var(--color-text-tertiary);
+    border-top: 0.5px solid var(--color-border-tertiary);
+  }
+
+  @media (max-width: 720px) {
+    .tier-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="proto-header">
+  <div class="crumb">
+    <span>CLI Install</span>
+    <span class="dot"></span>
+    <span class="current">가격 비교</span>
+  </div>
+  <nav class="nav">
+    <a href="install.html">01 · CLI Install</a>
+    <a href="pricing.html" class="active">02 · 가격 비교</a>
+  </nav>
+</header>
+
+<main class="canvas">
+
+  <h1>가격은 광고비 규모에 따라 두 tier <span class="v">v2</span></h1>
+  <p class="subtitle">
+    <strong style="color: var(--color-text-primary); font-weight: 500;">Self-Serve</strong>는 본인이 운영하면서 agent만 빌려 쓰는 모델, <strong style="color: var(--color-text-primary); font-weight: 500;">Managed</strong>는 그 위에 PSM이 얹혀서 운영 전체를 함께하는 모델입니다. 광고비 $5만이 두 tier를 가르는 기준 — 그 이하는 사람 비용이 안 빠지고, 그 이상은 PSM 시간 가치가 나오기 시작합니다.
+  </p>
+
+  <!-- Spend input -->
+  <div class="spend-input-wrap">
+    <label>월 광고비 spend</label>
+    <div class="spend-controls">
+      <div>
+        <span class="spend-prefix">$</span>
+        <span id="spend-display" class="spend-prefix" style="color: var(--color-text-info);">30K</span>
+      </div>
+      <input type="range" id="spend-slider" min="10" max="120" value="30" step="5">
+      <div class="spend-preset">
+        <button data-spend="20">$20K</button>
+        <button data-spend="30" class="active">$30K</button>
+        <button data-spend="60">$60K</button>
+        <button data-spend="100">$100K</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Two tier cards -->
+  <div class="tier-grid">
+
+    <!-- Tier 1 -->
+    <div class="tier-card" id="tier-self">
+      <div class="tier-label">TIER 1</div>
+      <h2>Self-Serve</h2>
+      <p class="segment">광고비 $10K – $50K · 본인이 직접 운영</p>
+
+      <div class="price-headline" id="self-price">$2,050<span class="unit"> / 월</span></div>
+      <div class="price-sub" id="self-pct">광고비의 약 6.8%</div>
+
+      <div class="features">
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>CLI install</strong> — Claude Code · Cursor · GPT 어디서든</span></div>
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>9개 agent license</strong> — Intelligence · Demand Creation · Demand Capture</span></div>
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>본인 환경에서 실행</strong> — 데이터·AI 모델·토큰 모두 본인 부담·관리</span></div>
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>AM 개입 최소</strong> — agent가 직접 응답, 결정은 본인</span></div>
+        <div class="feat"><i class="ti ti-x" style="color: var(--color-text-tertiary);" aria-hidden="true"></i><span style="color: var(--color-text-tertiary);">정기 MBR · 전담 PSM 없음</span></div>
+      </div>
+    </div>
+
+    <!-- Tier 2 -->
+    <div class="tier-card" id="tier-managed">
+      <div class="tier-label">TIER 2</div>
+      <h2>Managed</h2>
+      <p class="segment">광고비 $50K – $100K+ · PSM이 운영 전체를 함께</p>
+
+      <div class="price-headline" id="managed-price">—</div>
+      <div class="price-sub" id="managed-pct">광고비 $50K 이상에서 가능</div>
+
+      <div class="features">
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>Self-Serve의 모든 것</strong> + agent license 포함</span></div>
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>전담 PSM</strong> — 정기 MBR, 전략 결정, 임시 대응</span></div>
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>Custom agent 작업</strong> — 본인 브랜드 맞춤 workflow 구축</span></div>
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>PSM이 agent stack 위에서 운영</strong> — 한 사람이 15–25 brand 동시 케어</span></div>
+        <div class="feat"><i class="ti ti-check" aria-hidden="true"></i><span><strong>"본인 인력 없어도 됨"</strong> — 결정만 하면, 운영은 우리가</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Industry comparison -->
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Tier / 옵션</th>
+        <th>Management fee</th>
+        <th>비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="us">
+        <td><strong>Self-Serve (우리)</strong></td>
+        <td>광고비의 3–7%</td>
+        <td>CLI agent license, AM 개입 최소</td>
+      </tr>
+      <tr class="us">
+        <td><strong>Managed (우리)</strong></td>
+        <td>광고비의 5–9%</td>
+        <td>Agent + PSM, 운영 전체</td>
+      </tr>
+      <tr>
+        <td>중소 에이전시</td>
+        <td>광고비의 8–12%</td>
+        <td>전체 패키지, agent 선택권 없음</td>
+      </tr>
+      <tr>
+        <td>Tinuiti · Acadia</td>
+        <td>광고비의 12–20%</td>
+        <td>대형 브랜드 대상 ($200K+)</td>
+      </tr>
+      <tr>
+        <td>자체 운영 (1명 풀타임)</td>
+        <td>인건비 $5K–8K / 월</td>
+        <td>광고비 $50K 미만에선 비효율</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>토큰 비용은 어디로?</strong> Bolta CLI 모델과 동일하게, AI 도구의 토큰 비용은 고객이 본인 AI 계정으로 부담합니다. 우리는 agent license + API 게이트웨이만 제공하므로 토큰 비용을 가격에 전가할 일이 없습니다. 이게 우리 가격이 업계 standard보다 명확히 낮은 이유입니다.
+  </div>
+
+</main>
+
+<footer class="proto-footer">
+  Prototype v2 · for internal team alignment only · 실제 가격·계약 아님
+</footer>
+
+<script>
+  let adSpend = 30; // K USD
+
+  function calcSelfServe(spendK) {
+    const totalSpend = spendK * 1000;
+    const sponsoredSpend = totalSpend * 0.5;
+    const dspSpend = totalSpend * 0.15;
+    const seedingSpend = totalSpend * 0.15;
+
+    const myBsr = 100;
+    const categoryTracker = 150;
+    const influencer = 300 + seedingSpend * 0.04;
+    const dspAudience = 200 + dspSpend * 0.05;
+    const sponsoredRtb = sponsoredSpend * 0.03;
+    return Math.round(myBsr + categoryTracker + influencer + dspAudience + sponsoredRtb);
+  }
+
+  function calcManaged(spendK) {
+    if (spendK < 50) return null;
+    const selfServe = calcSelfServe(spendK);
+    const totalSpend = spendK * 1000;
+    const managedFee = Math.round(totalSpend * 0.025); // 2.5%
+    return selfServe + managedFee;
+  }
+
+  function update() {
+    const spendUSD = adSpend * 1000;
+
+    // Self-Serve
+    const selfFee = calcSelfServe(adSpend);
+    const selfPct = ((selfFee / spendUSD) * 100).toFixed(1);
+    document.getElementById('self-price').innerHTML = '$' + selfFee.toLocaleString() + '<span class="unit"> / 월</span>';
+    document.getElementById('self-pct').textContent = '광고비의 약 ' + selfPct + '%';
+
+    // Managed
+    const managedFee = calcManaged(adSpend);
+    if (managedFee === null) {
+      document.getElementById('managed-price').innerHTML = '—';
+      document.getElementById('managed-pct').textContent = '광고비 $50K 이상에서 가능';
+      document.getElementById('tier-managed').classList.remove('selected');
+      document.getElementById('tier-self').classList.add('selected');
+    } else {
+      const managedPct = ((managedFee / spendUSD) * 100).toFixed(1);
+      document.getElementById('managed-price').innerHTML = '$' + managedFee.toLocaleString() + '<span class="unit"> / 월</span>';
+      document.getElementById('managed-pct').textContent = '광고비의 약 ' + managedPct + '%';
+      document.getElementById('tier-managed').classList.add('selected');
+      document.getElementById('tier-self').classList.remove('selected');
+    }
+  }
+
+  const slider = document.getElementById('spend-slider');
+  const display = document.getElementById('spend-display');
+  const presets = document.querySelectorAll('.spend-preset button');
+
+  function setSpend(v) {
+    adSpend = parseInt(v);
+    slider.value = adSpend;
+    display.textContent = adSpend + 'K';
+    presets.forEach(b => b.classList.toggle('active', parseInt(b.dataset.spend) === adSpend));
+    update();
+  }
+  slider.addEventListener('input', e => setSpend(e.target.value));
+  presets.forEach(b => b.addEventListener('click', () => setSpend(b.dataset.spend)));
+
+  update();
+</script>
+
+</body>
+</html>
