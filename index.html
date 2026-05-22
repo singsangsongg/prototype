@@ -174,7 +174,7 @@
   <div class="versions-head">
     <div class="eyebrow">DOCUMENT & PROTOTYPE</div>
     <h2>v1 → v2 사고의 변화</h2>
-    <p>v1은 우리 솔루션을 SaaS로 가정한 첫 모델, v2는 그 가정을 버리고 CLI 기반 agent 모델로 재구성한 것입니다. v2는 추가로 Self-Serve / Managed 두 tier로 segment를 분리합니다.</p>
+    <p>v1은 우리 솔루션을 SaaS로 가정한 첫 모델, v2는 v1의 모든 것을 유지하되 실행 layer만 CLI 기반으로 프레임을 바꾼 것입니다. 진단·9개 agent·가격 모델은 그대로, 전달 방식만 다릅니다.</p>
   </div>
 
   <div class="v-grid">
@@ -212,24 +212,24 @@
       <div class="label">VERSION 2 · 2026.05</div>
       <h3>CLI Agent 모델</h3>
       <p class="core">
-        SaaS를 버리고 <strong>고객 환경에 install되는 CLI</strong>로 전환. 고객이 본인 AI 도구(Claude Code 등)에서 자연어로 운영. <strong>Self-Serve ($10K–$50K)</strong>와 <strong>Managed ($50K–$100K+)</strong> 두 tier.
+        v1의 모든 것을 유지하되, <strong>실행 layer만 바꿈</strong>. SaaS dashboard 대신 <strong>고객 환경에 CLI install</strong>되어 본인 AI 도구(Claude Code 등)에서 자연어로 작동. 같은 진단·9개 agent·가격, 다른 전달 방식.
       </p>
       <div class="links">
         <a href="Strategy_Memo_v2.pdf" target="_blank">
           <i class="ti ti-file-text" aria-hidden="true"></i>
-          전략 메모 v2 (PDF · 18분)
+          전략 메모 v2 (PDF · 15분)
         </a>
-        <a href="v2/screens/install.html">
-          <i class="ti ti-terminal" aria-hidden="true"></i>
-          Prototype v2 · CLI Install
+        <a href="v2/screens/screen-1-free.html">
+          <i class="ti ti-lock" aria-hidden="true"></i>
+          Prototype v2 · 무료 진단
         </a>
-        <a href="v2/screens/agents.html">
-          <i class="ti ti-cube" aria-hidden="true"></i>
-          Prototype v2 · 9 Agents
+        <a href="v2/screens/screen-2-connected.html">
+          <i class="ti ti-lock-open" aria-hidden="true"></i>
+          Prototype v2 · 전체 진단
         </a>
-        <a href="v2/screens/pricing.html">
-          <i class="ti ti-coins" aria-hidden="true"></i>
-          Prototype v2 · 가격 비교
+        <a href="v2/screens/screen-3-quote.html">
+          <i class="ti ti-adjustments" aria-hidden="true"></i>
+          Prototype v2 · 견적 만들기
         </a>
       </div>
     </div>
@@ -239,7 +239,7 @@
 
 <section class="note">
   <div class="box">
-    <strong>두 버전을 다 보는 이유:</strong> v1과 v2 사이에 큰 가정 변화가 있었습니다. v1은 우리가 SaaS dashboard를 만들고 고객이 거기 로그인한다고 가정했는데, Bolta CLI 사례를 본 뒤 그 가정 자체를 버렸습니다. v2는 고객의 AI 환경에 install되는 agent 모델로 재구성한 결과입니다. 회의에서 두 버전을 비교해보면 "왜 v2로 가야 하는가"가 명확해집니다.
+    <strong>두 버전을 다 보는 이유:</strong> v1과 v2는 본질·구조·가격 모델이 동일합니다 — 진단·처방·9개 agent·Funnel Matrix·wedge·가격은 그대로입니다. <strong>딱 한 가지가 다릅니다.</strong> v1은 우리 SaaS dashboard에서 운영한다고 가정했고, v2는 Bolta CLI 사례에서 영감을 받아 <strong>고객 환경에 CLI로 install되어 본인 AI 도구로 작동</strong>하도록 프레임을 바꿉니다. 두 prototype의 같은 화면(무료 진단 / 전체 진단 / 견적)을 나란히 비교해보시면 차이가 명확합니다 — 무엇이 같고, 무엇이 바뀌었는지.
     <br><br>
     <strong>회의 진행 방식:</strong> Amazon 스타일 6-pager 메모입니다. 회의 시작 후 처음 10–15분은 v2 메모를 함께 읽고, 그 다음 메모 6번 섹션(같이 정해야 할 것들)의 Q1–Q5를 토론합니다. v1은 참고용으로 옆에 두세요.
   </div>

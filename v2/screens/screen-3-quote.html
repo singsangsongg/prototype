@@ -141,13 +141,23 @@
   </nav>
 </header>
 
+<div style="max-width: 920px; margin: 0 auto; padding: 10px 24px 0;">
+  <div style="display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--color-background-info); border-radius: var(--border-radius-md); font-size: 11.5px; color: var(--color-text-primary);">
+    <i class="ti ti-terminal" style="font-size: 13px; color: var(--color-text-info);" aria-hidden="true"></i>
+    <span><strong style="font-weight: 500;">v2 프레임:</strong> 이 화면은 데모입니다. 실제로는 고객이 본인 AI 도구(Claude Code · Cursor · GPT)에 우리 CLI agent를 install해서 자연어로 결과를 받습니다. 같은 정보를 다른 전달 방식으로.</span>
+  </div>
+</div>
+
 <main class="canvas">
 <h2 class="sr-only">처방을 켜고 끄며 견적과 예상 임팩트를 실시간으로 확인할 수 있는 인터랙티브 화면.</h2>
 
 <div style="margin: 0 0 1.25rem; padding-bottom: 1rem; border-bottom: 0.5px solid var(--color-border-tertiary);">
   <h1 style="font-family: var(--font-serif); font-size: 26px; font-weight: 500; margin: 0 0 4px; color: var(--color-text-primary); line-height: 1.2;">처방을 조합해보세요</h1>
-  <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">
+  <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 8px; line-height: 1.5;">
     Brand A의 병목 분석 기반 추천. 켜고 끄면서 자유롭게 조합하세요 — 우측 패널이 실시간으로 임팩트를 보여줍니다.
+  </p>
+  <p style="font-size: 11.5px; color: var(--color-text-tertiary); margin: 0; line-height: 1.5; font-style: italic;">
+    실제 환경에서는 같은 작업을 본인 AI 도구에서 한 줄로: "Brand A 광고비 $30K로 견적 짜줘. Seeding과 DSP 켜고."
   </p>
 </div>
 
@@ -357,6 +367,14 @@
         <i class="ti ti-info-circle" style="font-size: 14px; color: var(--color-text-secondary); margin-top: 2px;" aria-hidden="true"></i>
         <p style="font-size: 11px; color: var(--color-text-secondary); margin: 0; line-height: 1.5;">
           견적은 견적일 뿐 결제가 아닙니다. 상담 후 서비스 범위를 같이 확정합니다.
+        </p>
+      </div>
+    </div>
+    <div style="margin-top: 10px; padding: 10px 12px; background: var(--color-background-info); border-radius: var(--border-radius-md);">
+      <div style="display: flex; align-items: flex-start; gap: 8px;">
+        <i class="ti ti-terminal" style="font-size: 14px; color: var(--color-text-info); margin-top: 2px;" aria-hidden="true"></i>
+        <p style="font-size: 11px; color: var(--color-text-primary); margin: 0; line-height: 1.5;">
+          <strong style="font-weight: 500;">CLI 작동 방식:</strong> 활성화된 agent는 본인 AI 도구에 CLI로 install됩니다. <code style="font-size: 10px; background: rgba(255,255,255,0.6); padding: 1px 4px; border-radius: 3px;">$ npm install -g @retail-media/cli</code> 한 줄로 설치, 본인 환경에서 자연어 명령으로 실행.
         </p>
       </div>
     </div>
