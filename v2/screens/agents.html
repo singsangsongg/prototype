@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Catalog · v2 Prototype</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../../vendor/tabler/tabler-icons.min.css">
+<style>
+  .canvas { max-width: 920px; margin: 0 auto; padding: 40px 32px; }
+  .proto-header {
+    max-width: 920px; margin: 0 auto;
+    padding: 20px 32px; display: flex;
+    justify-content: space-between; align-items: center;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  .crumb { font-size: 12px; color: var(--color-text-tertiary); display: flex; align-items: center; gap: 8px; }
+  .crumb .dot { width: 3px; height: 3px; background: var(--color-text-tertiary); border-radius: 50%; }
+  .crumb .current { color: var(--color-text-primary); font-weight: 500; }
+  .nav { display: flex; gap: 6px; }
+  .nav a {
+    font-size: 12px; padding: 6px 12px;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    text-decoration: none; color: var(--color-text-secondary);
+  }
+  .nav a.active {
+    background: var(--color-text-primary); color: var(--color-background-primary);
+    border-color: var(--color-text-primary);
+  }
+
+  h1 { font-family: var(--font-serif); font-size: 32px; font-weight: 500; margin: 0 0 8px; }
+  h1 .v { font-size: 14px; color: var(--color-text-info); font-weight: 500; vertical-align: super; }
+  .subtitle { font-size: 14px; color: var(--color-text-secondary); margin: 0 0 32px; line-height: 1.5; max-width: 720px; }
+
+  /* Manifesto callout */
+  .manifesto {
+    background: var(--color-background-info);
+    border-left: 3px solid var(--color-text-info);
+    padding: 16px 18px;
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    margin: 0 0 36px;
+    font-size: 13.5px; line-height: 1.6;
+    color: var(--color-text-primary);
+  }
+  .manifesto strong { font-weight: 500; }
+  .manifesto .quote {
+    color: var(--color-text-tertiary);
+    font-style: italic;
+    font-size: 12.5px;
+    margin-top: 8px;
+    display: block;
+  }
+
+  /* Group header */
+  .group {
+    margin-bottom: 36px;
+  }
+  .group-head {
+    margin: 0 0 14px;
+    padding: 0 0 12px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  .group-head .num {
+    font-family: var(--font-serif);
+    font-size: 14px; color: var(--color-text-info);
+    font-weight: 500; margin-right: 12px;
+  }
+  .group-head .title {
+    font-family: var(--font-serif);
+    font-size: 22px; font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .group-head .sub {
+    display: block;
+    font-size: 12.5px; color: var(--color-text-secondary);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* Agent cards */
+  .agent-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .agent {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+  .agent .head {
+    display: flex; align-items: center; gap: 10px;
+    margin: 0 0 14px;
+  }
+  .agent .icon-wrap {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--color-background-secondary);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .agent .icon-wrap i {
+    font-size: 18px;
+    color: var(--color-text-info);
+  }
+  .agent .name {
+    font-family: var(--font-serif);
+    font-size: 15px; font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.25;
+  }
+
+  .agent .section-label {
+    font-size: 10px; letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin: 0 0 4px;
+  }
+  .agent .knowledge {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin: 0 0 12px;
+  }
+  .agent .cli-example {
+    background: #0a0a0a;
+    color: #c5c5c5;
+    font-family: "SF Mono", Monaco, monospace;
+    font-size: 11px;
+    padding: 8px 10px;
+    border-radius: 5px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .agent .cli-example .prompt { color: #6a8caf; user-select: none; }
+  .agent .nl-example {
+    font-size: 11.5px;
+    color: var(--color-text-primary);
+    font-style: italic;
+    line-height: 1.5;
+    padding-top: 10px;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin-top: auto;
+  }
+  .agent .nl-example::before {
+    content: '"';
+    color: var(--color-text-info);
+    font-weight: 700;
+  }
+  .agent .nl-example::after {
+    content: '"';
+    color: var(--color-text-info);
+    font-weight: 700;
+  }
+
+  /* Closing note */
+  .closing {
+    padding: 20px 24px;
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-lg);
+    margin: 40px 0 0;
+    font-size: 13px; color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+  .closing strong { color: var(--color-text-primary); font-weight: 500; }
+
+  .proto-footer {
+    max-width: 920px; margin: 60px auto 40px;
+    padding: 20px 32px; text-align: center;
+    font-size: 11px; color: var(--color-text-tertiary);
+    border-top: 0.5px solid var(--color-border-tertiary);
+  }
+
+  @media (max-width: 720px) {
+    .agent-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="proto-header">
+  <div class="crumb">
+    <span>CLI Install</span>
+    <span class="dot"></span>
+    <span class="current">9 Agents</span>
+    <span class="dot"></span>
+    <span>가격 비교</span>
+  </div>
+  <nav class="nav">
+    <a href="install.html">01 · CLI Install</a>
+    <a href="agents.html" class="active">02 · 9 Agents</a>
+    <a href="pricing.html">03 · 가격 비교</a>
+  </nav>
+</header>
+
+<main class="canvas">
+
+  <h1>9개 Agent — 우리 도메인 지식의 응축 <span class="v">v2</span></h1>
+  <p class="subtitle">
+    각 agent는 단순한 API wrapper가 아닙니다. 우리가 직접 K-Brand를 운영하면서 쌓은 retail media 도메인 지식 — bid·budget 최적화 로직, 인플루언서 매칭 풀, AMC 질의 라이브러리, DSP funnel 분해 framework — 이 코드로 응축된 것입니다. CLI는 이것을 본인 AI 도구로 전달하는 그릇일 뿐입니다.
+  </p>
+
+  <div class="manifesto">
+    <strong>왜 도메인 지식이 본질인가:</strong> AI 모델은 누구나 갖다 쓸 수 있습니다. CLI 패키징도 누구나 만들 수 있습니다. 시장에서 우리 agent가 의미 있는 이유는 그 안에 응축된 운영 판단·benchmark·playbook 때문입니다. 같은 명령을 일반 Claude에 시키면 "DSP가 무엇인지 설명하는" 일반론이 나옵니다. 우리 agent에 시키면 한국 → 미국 K-Brand 운영 경험에서 검증된 판단이 나옵니다.
+    <span class="quote">"agent의 코드 자체보다, 그 코드가 담고 있는 운영 판단·benchmark·playbook이 본질이다." — 전략 메모 v2, Section 2</span>
+  </div>
+
+  <!-- Group 1 -->
+  <div class="group">
+    <div class="group-head">
+      <span class="num">01</span>
+      <span class="title">Intelligence</span>
+      <span class="sub">시장과 내 위치 파악 — 진단의 기준선이 되는 데이터를 만든다</span>
+    </div>
+    <div class="agent-grid">
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-radar-2" aria-hidden="true"></i></div>
+          <div class="name">경쟁사 모니터</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">BSR 변화 임계치 · 가격 변동 패턴 · 리뷰 velocity 정상 범위</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail competitor monitor --asin ABC --range 7d</pre>
+        <p class="nl-example">경쟁사 ABC의 BSR·가격·리뷰 변화 일간 추적해줘</p>
+      </div>
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-trending-up" aria-hidden="true"></i></div>
+          <div class="name">카테고리 트래커</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">카테고리별 진입 장벽 · 시즌성 패턴 · 신규 진입자 시그널 모델</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail category track --category beauty</pre>
+        <p class="nl-example">내 카테고리 순위 증감과 신규 진입자 알림 설정해줘</p>
+      </div>
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+          <div class="name">My BSR 트래커</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">광고 의존도 진단 · 유기 vs 광고 트래픽 정상 비율 · keyword 회복 패턴</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail mybsr --asins ABC,DEF --range 30d</pre>
+        <p class="nl-example">내 ASIN 5개의 BSR · 유기 트래픽 · keyword 추이 보여줘</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Group 2 -->
+  <div class="group">
+    <div class="group-head">
+      <span class="num">02</span>
+      <span class="title">Demand Creation</span>
+      <span class="sub">외부에서 인지·트래픽 생성 — Amazon 안에서만 풀 수 없는 갭을 해결</span>
+    </div>
+    <div class="agent-grid">
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-users" aria-hidden="true"></i></div>
+          <div class="name">인플루언서 매칭</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">TikTok·Meta 시딩 풀 (~2,400) · 카테고리별 매칭 패턴 · 후행지표 검증 프레임</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail influencer match --followers 10K-50K</pre>
+        <p class="nl-example">팔로워 10K–50K, beauty, 미국 거주 시딩 후보 30명 추천해줘</p>
+      </div>
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-target" aria-hidden="true"></i></div>
+          <div class="name">DSP Audience Builder</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">ASIN/category viewer 효율 비교 · lookalike 시드 선정 기준 · audience 중첩 회피</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail dsp audience --asin ABC --type lookalike</pre>
+        <p class="nl-example">ASIN viewer + category viewer lookalike 자동 생성해줘</p>
+      </div>
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-layout-grid" aria-hidden="true"></i></div>
+          <div class="name">DSP Campaign Designer</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">Awareness/Consideration/Conversion 단계별 인벤토리 (Prime Video·Twitch·Fire TV) 효율 · 예산 배분 framework</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail dsp design --budget 10K --awareness 0.6</pre>
+        <p class="nl-example">광고비 $10K로 Awareness 60% / Consideration 30% / Conversion 10% plan 짜줘</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Group 3 -->
+  <div class="group">
+    <div class="group-head">
+      <span class="num">03</span>
+      <span class="title">Demand Capture</span>
+      <span class="sub">Amazon 내부 효율 — Sponsored Ads와 AMC 분석으로 전환 끌어올리기</span>
+    </div>
+    <div class="agent-grid">
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-template" aria-hidden="true"></i></div>
+          <div class="name">Sponsored Campaign Designer</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">캠페인 구조 (SP/SB/SD) 조합 patterns · 신규 ASIN 런칭 플레이북 · cannibalization 회피</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail sp design --launch --asins NEW1,NEW2,NEW3</pre>
+        <p class="nl-example">신규 ASIN 3개 런칭 캠페인 구조 설계해줘</p>
+      </div>
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-bolt" aria-hidden="true"></i></div>
+          <div class="name">Sponsored RTB</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">Bid·budget·placement 최적화 로직 · time-of-day 패턴 · keyword 회수율 모델</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail sp rtb --auto --range 7d</pre>
+        <p class="nl-example">지난주 keyword 성과 기반으로 bid·budget 재조정해줘</p>
+      </div>
+
+      <div class="agent">
+        <div class="head">
+          <div class="icon-wrap"><i class="ti ti-message-chatbot" aria-hidden="true"></i></div>
+          <div class="name">AMC Insight</div>
+        </div>
+        <div class="section-label">응축된 도메인 지식</div>
+        <p class="knowledge">자주 묻는 audience·도달·전환 질의 라이브러리 · 자연어 → SQL 매핑 · 도달 미달 진단 패턴</p>
+        <div class="section-label">CLI</div>
+        <pre class="cli-example"><span class="prompt">$</span> retail amc query --type reach-gap --audience cart</pre>
+        <p class="nl-example">Cart abandoner audience의 retargeting 도달 미달 분석해줘</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="closing">
+    <strong>9개라는 숫자에 집착하지 않습니다.</strong> 도메인을 운영하면서 패턴이 충분히 반복된 agent만 만듭니다. 효과가 약한 agent는 deprecate합니다. 새 agent는 한국 → 미국 K-Brand 운영 중에 자연스럽게 발견됩니다. 카탈로그 자체가 우리 도메인 지식의 현재 상태를 반영합니다.
+  </div>
+
+</main>
+
+<footer class="proto-footer">
+  Prototype v2 · for internal team alignment only · 실제 CLI 명령어는 예시입니다
+</footer>
+
+</body>
+</html>
