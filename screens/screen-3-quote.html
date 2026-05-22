@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>견적 만들기 · Brand A</title>
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="../vendor/tabler/tabler-icons.min.css">
 <style>
@@ -61,6 +61,67 @@
     background: var(--color-text-info);
     transition: width 0.4s ease;
   }
+
+  .spend-input-wrap {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: 14px 16px;
+    margin: 0 0 1.25rem;
+  }
+  .spend-input-wrap label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+  .spend-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .spend-controls > div {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .spend-prefix {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .spend-controls input[type="range"] {
+    flex: 1;
+    min-width: 200px;
+    accent-color: var(--color-text-info);
+  }
+  .spend-preset {
+    display: flex;
+    gap: 4px;
+  }
+  .spend-preset button {
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+  }
+  .spend-preset button.active {
+    background: var(--color-text-info);
+    color: var(--color-background-primary);
+    border-color: var(--color-text-info);
+  }
+  .price-note {
+    font-size: 10.5px;
+    color: var(--color-text-tertiary);
+    font-style: italic;
+    margin-top: 2px;
+  }
 </style>
 </head>
 <body>
@@ -90,6 +151,26 @@
   </p>
 </div>
 
+<!-- AD SPEND INPUT -->
+<div class="spend-input-wrap">
+  <label>월 광고비 spend</label>
+  <div class="spend-controls">
+    <div>
+      <span class="spend-prefix">$</span>
+      <span id="spend-display" class="spend-prefix" style="color: var(--color-text-info);">30K</span>
+    </div>
+    <input type="range" id="spend-slider" min="5" max="80" value="30" step="5">
+    <div class="spend-preset">
+      <button data-spend="10">$10K</button>
+      <button data-spend="30" class="active">$30K</button>
+      <button data-spend="50">$50K</button>
+    </div>
+  </div>
+  <div class="price-note" style="margin-top: 8px;">
+    가격은 광고비 규모에 따라 자동 조정됩니다. 합리적 management fee 범위(3–7%) 유지.
+  </div>
+</div>
+
 <div style="display: grid; grid-template-columns: 1fr 280px; gap: 20px; align-items: flex-start;">
 
   <!-- LEFT -->
@@ -101,7 +182,8 @@
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px;">
 
-        <div class="agent-card" data-on="true" data-recommended="true" data-impact="180" data-price-min="380" data-price-max="640" data-id="seeding">
+        <div class="agent-card" data-on="true" data-recommended="true" data-impact="180"
+             data-id="seeding" data-pricing="seeding">
           <div style="display: flex; align-items: center; gap: 12px;">
             <div style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
               <i class="ti ti-seedling" style="font-size: 18px; color: var(--color-text-info);" aria-hidden="true"></i>
@@ -121,11 +203,12 @@
           </div>
           <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary);">
             <span style="font-size: 11px; color: var(--color-text-tertiary); flex: 1;">병목 1·3순위 동시 해결 · 인플루언서 매칭 풀 ~2,400</span>
-            <span style="font-size: 11px; color: var(--color-text-secondary);">From <strong style="font-weight: 500; color: var(--color-text-primary);">₩380K / 월</strong></span>
+            <span style="font-size: 11px; color: var(--color-text-secondary);">$300 base + 시딩 spend의 4%</span>
           </div>
         </div>
 
-        <div class="agent-card" data-on="true" data-recommended="true" data-impact="32" data-price-min="180" data-price-max="320" data-id="dsp">
+        <div class="agent-card" data-on="true" data-recommended="true" data-impact="32"
+             data-id="dsp" data-pricing="dsp">
           <div style="display: flex; align-items: center; gap: 12px;">
             <div style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
               <i class="ti ti-users" style="font-size: 18px; color: var(--color-text-info);" aria-hidden="true"></i>
@@ -145,11 +228,12 @@
           </div>
           <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary);">
             <span style="font-size: 11px; color: var(--color-text-tertiary); flex: 1;">병목 3순위 해결 · ASIN viewer + lookalike audience</span>
-            <span style="font-size: 11px; color: var(--color-text-secondary);">From <strong style="font-weight: 500; color: var(--color-text-primary);">₩180K / 월</strong></span>
+            <span style="font-size: 11px; color: var(--color-text-secondary);">$200 base + DSP spend의 5%</span>
           </div>
         </div>
 
-        <div class="agent-card" data-on="false" data-recommended="true" data-impact="18" data-price-min="120" data-price-max="220" data-id="creative">
+        <div class="agent-card" data-on="false" data-recommended="true" data-impact="18"
+             data-id="creative" data-pricing="creative">
           <div style="display: flex; align-items: center; gap: 12px;">
             <div style="flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
               <i class="ti ti-wand" style="font-size: 18px; color: var(--color-text-secondary);" aria-hidden="true"></i>
@@ -169,7 +253,7 @@
           </div>
           <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-tertiary);">
             <span style="font-size: 11px; color: var(--color-text-tertiary); flex: 1;">병목 2순위 해결 · 자기 잠식 ASIN 자동 식별</span>
-            <span style="font-size: 11px; color: var(--color-text-secondary);">From <strong style="font-weight: 500; color: var(--color-text-primary);">₩120K / 월</strong></span>
+            <span style="font-size: 11px; color: var(--color-text-secondary);">$150 / 월 (flat)</span>
           </div>
         </div>
 
@@ -183,7 +267,8 @@
       </div>
       <div style="display: flex; flex-direction: column; gap: 10px;">
 
-        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0" data-price-min="240" data-price-max="420" data-id="amc">
+        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0"
+             data-id="amc" data-pricing="amc">
           <div style="display: flex; align-items: center; gap: 12px;">
             <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
               <i class="ti ti-target" style="font-size: 16px; color: var(--color-text-secondary);" aria-hidden="true"></i>
@@ -192,12 +277,13 @@
               <div style="font-family: var(--font-serif); font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px;">AMC Insight</div>
               <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">자연어 질의 · custom audience · 도달 미달 분석</p>
             </div>
-            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">From ₩240K</span>
+            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">$300 / 월 (flat)</span>
             <button class="toggle" data-on="false" data-id="amc" aria-label="AMC Insight on/off"></button>
           </div>
         </div>
 
-        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0" data-price-min="160" data-price-max="280" data-id="rtb">
+        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0"
+             data-id="rtb" data-pricing="rtb">
           <div style="display: flex; align-items: center; gap: 12px;">
             <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
               <i class="ti ti-bolt" style="font-size: 16px; color: var(--color-text-secondary);" aria-hidden="true"></i>
@@ -206,12 +292,13 @@
               <div style="font-family: var(--font-serif); font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px;">SA RTB</div>
               <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">Sponsored Ads bid · budget · keyword 자동화</p>
             </div>
-            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">From ₩160K</span>
+            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">Sponsored spend의 3%</span>
             <button class="toggle" data-on="false" data-id="rtb" aria-label="SA RTB on/off"></button>
           </div>
         </div>
 
-        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0" data-price-min="300" data-price-max="500" data-id="designer">
+        <div class="agent-card" data-on="false" data-recommended="false" data-impact="0"
+             data-id="designer" data-pricing="designer">
           <div style="display: flex; align-items: center; gap: 12px;">
             <div style="flex-shrink: 0; width: 32px; height: 32px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center;">
               <i class="ti ti-layout-grid" style="font-size: 16px; color: var(--color-text-secondary);" aria-hidden="true"></i>
@@ -220,7 +307,7 @@
               <div style="font-family: var(--font-serif); font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px;">Campaign Designer</div>
               <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4;">캠페인 구조 재설계 · 신규 ASIN 런칭</p>
             </div>
-            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">From ₩300K</span>
+            <span style="font-size: 11px; color: var(--color-text-secondary); flex-shrink: 0;">$500 / project</span>
             <button class="toggle" data-on="false" data-id="designer" aria-label="Campaign Designer on/off"></button>
           </div>
         </div>
@@ -248,11 +335,15 @@
       </div>
       <div style="padding-top: 0.85rem; margin-top: 0.85rem; border-top: 0.5px solid var(--color-border-tertiary);">
         <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 4px;">
-          <span style="font-size: 13px; color: var(--color-text-primary); font-weight: 500;">월 견적</span>
-          <span style="font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: var(--color-text-primary);" id="quote-range">₩560K~960K</span>
+          <span style="font-size: 13px; color: var(--color-text-primary); font-weight: 500;">월 fee</span>
+          <span style="font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: var(--color-text-primary);" id="quote-fee">$1,600</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 6px;">
+          <span style="font-size: 11px; color: var(--color-text-tertiary);">광고비 대비</span>
+          <span style="font-size: 12px; font-weight: 500; color: var(--color-text-info);" id="quote-pct">5.3%</span>
         </div>
         <div style="font-size: 11px; color: var(--color-text-tertiary); line-height: 1.4;">
-          최종 가격은 PSM 상담 후 확정됩니다. 광고비 % 옵션도 가능.
+          업계 standard 8–15% 대비 합리적 범위. 최종 가격은 PSM 상담 후 확정.
         </div>
       </div>
       <button id="psm-btn" style="width: 100%; margin-top: 1rem; padding: 11px; font-size: 13px; font-weight: 500;">PSM 상담 받기 →</button>
@@ -285,20 +376,40 @@
     seeding: 'Seeding Agent', dsp: 'DSP Audience', creative: 'Creative Audit',
     amc: 'AMC Insight', rtb: 'SA RTB', designer: 'Campaign Designer'
   };
-  const targetGap = 243;
+  const targetGap = 243; // K
+  let adSpend = 30; // in K USD
+
+  // Pricing logic — returns fee in USD given the agent + monthly spend
+  // Spend allocation assumption: Sponsored ~50%, DSP ~15%, Seeding ~15%, rest = creative/etc
+  function calculateAgentFee(agentId, monthlyAdSpendK) {
+    const totalSpend = monthlyAdSpendK * 1000;
+    const sponsoredSpend = totalSpend * 0.5;
+    const dspSpend = totalSpend * 0.15;
+    const seedingSpend = totalSpend * 0.15;
+
+    switch(agentId) {
+      case 'seeding':   return Math.round(300 + seedingSpend * 0.04);
+      case 'dsp':       return Math.round(200 + dspSpend * 0.05);
+      case 'creative':  return 150;
+      case 'amc':       return 300;
+      case 'rtb':       return Math.round(sponsoredSpend * 0.03);
+      case 'designer':  return 500;
+      default:          return 0;
+    }
+  }
 
   function update() {
-    let totalImpact = 0, priceMin = 0, priceMax = 0;
+    let totalImpact = 0, totalFee = 0;
     const selected = [];
     cards.forEach(card => {
       const on = card.dataset.on === 'true';
       if (on) {
         totalImpact += parseFloat(card.dataset.impact);
-        priceMin += parseFloat(card.dataset.priceMin);
-        priceMax += parseFloat(card.dataset.priceMax);
+        totalFee += calculateAgentFee(card.dataset.id, adSpend);
         selected.push(card.dataset.id);
       }
     });
+
     document.getElementById('total-impact').textContent = totalImpact > 0 ? `+$${totalImpact}K` : '—';
     const pct = Math.min(100, Math.round((totalImpact / targetGap) * 100));
     document.getElementById('impact-fill').style.width = pct + '%';
@@ -306,19 +417,35 @@
       ? `목표 갭의 <span style="color: var(--color-text-primary); font-weight: 500;">${pct}%</span> 회수`
       : `처방을 켜면 임팩트가 표시됩니다`;
     document.getElementById('agent-count').textContent = selected.length + '개';
+
     const list = document.getElementById('selected-list');
     if (selected.length === 0) {
       list.innerHTML = '<div style="font-size: 12px; color: var(--color-text-tertiary); font-style: italic;">아직 선택된 Agent 없음</div>';
     } else {
-      list.innerHTML = selected.map(id =>
-        `<div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-primary);">
-          <i class="ti ti-check" style="font-size: 12px; color: var(--color-text-info);" aria-hidden="true"></i>
-          ${labels[id]}
-        </div>`).join('');
+      list.innerHTML = selected.map(id => {
+        const fee = calculateAgentFee(id, adSpend);
+        return `<div style="display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 12px;">
+          <span style="display: flex; align-items: center; gap: 6px; color: var(--color-text-primary);">
+            <i class="ti ti-check" style="font-size: 12px; color: var(--color-text-info);" aria-hidden="true"></i>
+            ${labels[id]}
+          </span>
+          <span style="color: var(--color-text-secondary); font-variant-numeric: tabular-nums;">$${fee.toLocaleString()}</span>
+        </div>`;
+      }).join('');
     }
-    document.getElementById('quote-range').textContent = selected.length === 0 ? '—' : `₩${priceMin}K~${priceMax}K`;
+
+    const totalSpendUSD = adSpend * 1000;
+    if (selected.length === 0) {
+      document.getElementById('quote-fee').textContent = '—';
+      document.getElementById('quote-pct').textContent = '—';
+    } else {
+      document.getElementById('quote-fee').textContent = '$' + totalFee.toLocaleString();
+      const feePct = ((totalFee / totalSpendUSD) * 100).toFixed(1);
+      document.getElementById('quote-pct').textContent = feePct + '%';
+    }
   }
 
+  // Toggle handlers
   toggles.forEach(t => {
     t.addEventListener('click', () => {
       const id = t.dataset.id;
@@ -328,6 +455,24 @@
       update();
     });
   });
+
+  // Ad spend slider
+  const slider = document.getElementById('spend-slider');
+  const display = document.getElementById('spend-display');
+  const presets = document.querySelectorAll('.spend-preset button');
+
+  function setSpend(value) {
+    adSpend = parseInt(value);
+    slider.value = adSpend;
+    display.textContent = adSpend + 'K';
+    presets.forEach(b => {
+      b.classList.toggle('active', parseInt(b.dataset.spend) === adSpend);
+    });
+    update();
+  }
+
+  slider.addEventListener('input', e => setSpend(e.target.value));
+  presets.forEach(b => b.addEventListener('click', () => setSpend(b.dataset.spend)));
 
   document.getElementById('psm-btn').addEventListener('click', () => {
     alert('PSM 상담 요청 (prototype — 실제 기능 아님)');
