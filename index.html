@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Strategy Prototype · Team Align</title>
+<meta name="robots" content="noindex, nofollow">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="vendor/tabler/tabler-icons.min.css">
 <style>
@@ -35,10 +36,156 @@
     margin: 24px 0 0;
   }
 
+  .section-title {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 32px 12px;
+  }
+  .section-title .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  .section-title h2 {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0 0 6px;
+    color: var(--color-text-primary);
+  }
+  .section-title p {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  /* Funnel Matrix */
+  .matrix-wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 8px 32px 0;
+  }
+  .matrix {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 0;
+    font-size: 12.5px;
+  }
+  .matrix th, .matrix td {
+    text-align: left;
+    vertical-align: top;
+    padding: 14px 14px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    line-height: 1.5;
+  }
+  .matrix thead th {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--color-text-tertiary);
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-border-secondary);
+    padding-bottom: 8px;
+  }
+  .matrix tbody th {
+    width: 130px;
+    font-family: var(--font-serif);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .matrix tbody td {
+    color: var(--color-text-secondary);
+  }
+  .matrix .stage-title {
+    display: block;
+    color: var(--color-text-primary);
+    font-weight: 500;
+    margin: 0 0 4px;
+  }
+  .matrix tbody tr:last-child th,
+  .matrix tbody tr:last-child td { border-bottom: none; }
+
+  /* Agent Grid */
+  .agent-section {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 32px 0;
+  }
+  .agent-group {
+    margin-top: 28px;
+  }
+  .agent-group-head {
+    display: flex; align-items: baseline; gap: 12px;
+    margin: 0 0 14px;
+  }
+  .agent-group-head .num {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--color-text-info);
+    font-weight: 500;
+  }
+  .agent-group-head .title {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+  .agent-group-head .sub {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-style: italic;
+  }
+  .agent-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+  }
+  .agent {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 16px 16px 14px;
+    transition: all 0.2s ease;
+  }
+  .agent:hover {
+    border-color: var(--color-border-info);
+    background: var(--color-background-info);
+  }
+  .agent .icon-wrap {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--color-background-secondary);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 10px;
+  }
+  .agent .icon-wrap i {
+    font-size: 16px;
+    color: var(--color-text-info);
+  }
+  .agent .name {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin: 0 0 3px;
+    line-height: 1.3;
+  }
+  .agent .sub {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    line-height: 1.4;
+  }
+
+  /* Prototype screens (existing) */
   .screens {
     max-width: 920px;
     margin: 0 auto;
-    padding: 0 32px 80px;
+    padding: 0 32px 0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px;
@@ -58,15 +205,15 @@
     transform: translateY(-2px);
   }
   .screen-card .visual {
-    height: 140px;
+    height: 120px;
     background: var(--color-background-secondary);
     display: flex; align-items: center; justify-content: center;
     border-bottom: 0.5px solid var(--color-border-tertiary);
   }
-  .screen-card .visual i { font-size: 36px; color: var(--color-text-info); }
-  .screen-card .body { padding: 18px 20px; }
+  .screen-card .visual i { font-size: 32px; color: var(--color-text-info); }
+  .screen-card .body { padding: 16px 18px; }
   .screen-card .num {
-    font-size: 11px;
+    font-size: 10.5px;
     letter-spacing: 0.1em;
     color: var(--color-text-tertiary);
     font-weight: 500;
@@ -74,16 +221,16 @@
   }
   .screen-card .title {
     font-family: var(--font-serif);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     margin: 0 0 6px;
     color: var(--color-text-primary);
   }
   .screen-card .desc {
-    font-size: 12.5px;
+    font-size: 12px;
     color: var(--color-text-secondary);
-    line-height: 1.5;
-    margin: 0 0 12px;
+    line-height: 1.45;
+    margin: 0 0 10px;
   }
   .screen-card .meta {
     font-size: 11px;
@@ -95,8 +242,8 @@
 
   .note {
     max-width: 920px;
-    margin: 0 auto 80px;
-    padding: 24px 32px;
+    margin: 40px auto 80px;
+    padding: 0 32px;
   }
   .note .box {
     background: var(--color-background-secondary);
@@ -109,8 +256,10 @@
   .note .box strong { color: var(--color-text-primary); font-weight: 500; }
 
   @media (max-width: 720px) {
-    .screens { grid-template-columns: 1fr; }
+    .screens, .agent-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 40px; }
+    .matrix tbody th { width: 100px; font-size: 13px; }
+    .matrix th, .matrix td { padding: 10px 8px; font-size: 11.5px; }
   }
 </style>
 </head>
@@ -124,7 +273,7 @@
   <h1>Retail Media,</h1>
   <h1 class="italic">다시 짜기.</h1>
   <p>
-    한국 → 미국 Amazon에 진출하는 성장기 K-Brand를 위한 새 운영 모델. 먼저 <strong style="color: var(--color-text-primary); font-weight: 500;">전략 메모</strong>를 읽고, 아래 <strong style="color: var(--color-text-primary); font-weight: 500;">prototype</strong>으로 화면이 어떻게 작동하는지 확인하세요.
+    한국 → 미국 Amazon에 진출하는 성장기 K-Brand를 위한 새 운영 모델. 먼저 <strong style="color: var(--color-text-primary); font-weight: 500;">전략 메모</strong>를 읽고, 아래에서 <strong style="color: var(--color-text-primary); font-weight: 500;">우리가 만들 framework와 agent</strong>를 보세요.
   </p>
 
   <div style="display: flex; gap: 10px; margin-top: 28px; flex-wrap: wrap;">
@@ -139,11 +288,141 @@
   </div>
 </section>
 
-<section class="screens-header" style="max-width: 920px; margin: 0 auto; padding: 0 32px 16px;">
-  <div style="display: flex; align-items: baseline; gap: 16px; padding-top: 24px; border-top: 0.5px solid var(--color-border-tertiary);">
-    <span style="font-size: 11px; letter-spacing: 0.1em; color: var(--color-text-tertiary); font-weight: 500;">PROTOTYPE</span>
-    <span style="font-size: 13px; color: var(--color-text-secondary);">메모 4번 섹션(고객 여정)이 화면으로 어떻게 보이는지</span>
+<!-- FUNNEL MATRIX -->
+<section class="section-title">
+  <div style="padding-top: 32px; border-top: 0.5px solid var(--color-border-tertiary);"></div>
+  <div class="eyebrow">FRAMEWORK</div>
+  <h2>Retail Media를 어떻게 분해할 것인가</h2>
+  <p>DSP를 한 덩어리로 보면 안 된다. Funnel stage별로 인벤토리·audience까지 명시되어야 고객이 본인 단계에 맞는 media plan을 이해할 수 있다. 이 matrix가 우리 진단의 framework다.</p>
+</section>
+
+<section class="matrix-wrap">
+  <table class="matrix">
+    <thead>
+      <tr>
+        <th></th>
+        <th>AWARENESS · 인지</th>
+        <th>CONSIDERATION · 관심</th>
+        <th>CONVERSION · 구매</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>DSP</th>
+        <td><span class="stage-title">Prime Video, Twitch, Fire TV</span>O&O display · 3P exchange</td>
+        <td><span class="stage-title">ASIN viewer · category viewer</span>search retargeting · similar product</td>
+        <td><span class="stage-title">Cart abandoner</span>subscriber lapsed · brand loyalist</td>
+      </tr>
+      <tr>
+        <th>Sponsored Ads</th>
+        <td><span class="stage-title">Sponsored Brands</span>HSA · brand store</td>
+        <td><span class="stage-title">Sponsored Display</span>audience targeting</td>
+        <td><span class="stage-title">Sponsored Products</span>keyword · product targeting</td>
+      </tr>
+      <tr>
+        <th>Off-Amazon</th>
+        <td><span class="stage-title">인플루언서 시딩</span>Meta · TikTok 신규 도달</td>
+        <td><span class="stage-title">Meta · TikTok retargeting</span></td>
+        <td style="color: var(--color-text-tertiary); font-style: italic;">Amazon에서 처리</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- AGENT CATALOG -->
+<section class="section-title">
+  <div style="padding-top: 32px; border-top: 0.5px solid var(--color-border-tertiary);"></div>
+  <div class="eyebrow">AGENT CATALOG · 9</div>
+  <h2>위 framework의 각 칸을 실행하는 도구</h2>
+  <p>고객은 본인 단계에 맞는 agent만 켠다. 사람은 결정의 순간에만 들어간다. 도구는 도메인에서 꼭 필요하다고 본 9개로 좁혔다.</p>
+</section>
+
+<section class="agent-section">
+  <!-- Group 1 -->
+  <div class="agent-group">
+    <div class="agent-group-head">
+      <span class="num">01</span>
+      <span class="title">Intelligence</span>
+      <span class="sub">— 시장과 내 위치를 파악</span>
+    </div>
+    <div class="agent-grid">
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-radar-2" aria-hidden="true"></i></div>
+        <div class="name">경쟁사 모니터</div>
+        <div class="sub">경쟁사 BSR · 가격 · 리뷰 변화 일간 추적</div>
+      </div>
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-trending-up" aria-hidden="true"></i></div>
+        <div class="name">카테고리 트래커</div>
+        <div class="sub">카테고리 BSR 순위 증감 · 신규 진입자 알림</div>
+      </div>
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-chart-line" aria-hidden="true"></i></div>
+        <div class="name">My BSR 트래커</div>
+        <div class="sub">내 ASIN BSR · 유기 트래픽 · keyword 추이</div>
+      </div>
+    </div>
   </div>
+
+  <!-- Group 2 -->
+  <div class="agent-group">
+    <div class="agent-group-head">
+      <span class="num">02</span>
+      <span class="title">Demand Creation</span>
+      <span class="sub">— 외부에서 인지와 트래픽을 만든다</span>
+    </div>
+    <div class="agent-grid">
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-users" aria-hidden="true"></i></div>
+        <div class="name">인플루언서 매칭</div>
+        <div class="sub">조건 입력 → TikTok·Meta 시딩 후보 리스트업</div>
+      </div>
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-target" aria-hidden="true"></i></div>
+        <div class="name">DSP Audience Builder</div>
+        <div class="sub">ASIN viewer · category viewer · lookalike 자동 생성</div>
+      </div>
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-layout-grid" aria-hidden="true"></i></div>
+        <div class="name">DSP Campaign Designer</div>
+        <div class="sub">Awareness/Consideration/Conversion 단계별 인벤토리 설계</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group 3 -->
+  <div class="agent-group">
+    <div class="agent-group-head">
+      <span class="num">03</span>
+      <span class="title">Demand Capture</span>
+      <span class="sub">— Amazon 내부 효율을 끌어올린다</span>
+    </div>
+    <div class="agent-grid">
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-template" aria-hidden="true"></i></div>
+        <div class="name">Sponsored Campaign Designer</div>
+        <div class="sub">캠페인 구조 재설계 · 신규 ASIN 런칭</div>
+      </div>
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-bolt" aria-hidden="true"></i></div>
+        <div class="name">Sponsored RTB</div>
+        <div class="sub">bid · budget · keyword 자동화</div>
+      </div>
+      <div class="agent">
+        <div class="icon-wrap"><i class="ti ti-message-chatbot" aria-hidden="true"></i></div>
+        <div class="name">AMC Insight</div>
+        <div class="sub">자연어 질의 · custom audience · 도달 미달 분석</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROTOTYPE -->
+<section class="section-title">
+  <div style="padding-top: 32px; border-top: 0.5px solid var(--color-border-tertiary);"></div>
+  <div class="eyebrow">PROTOTYPE</div>
+  <h2>고객 여정이 화면으로 어떻게 보이는지</h2>
+  <p>메모 4번 섹션(고객 여정)을 화면으로 옮기면 어떤 모습이 되는지 보여주는 prototype입니다. 직접 클릭하면서 흐름을 따라가보세요.</p>
 </section>
 
 <section class="screens">
@@ -181,7 +460,7 @@
       <div class="desc">Agent를 켜고 끄면서 견적과 임팩트가 실시간으로 변합니다. 결제 직전 단계.</div>
       <div class="meta">
         <i class="ti ti-pointer" style="font-size: 12px;" aria-hidden="true"></i>
-        토글을 직접 켜고 꺼보세요
+        광고비 슬라이더로 가격 변화 확인
       </div>
     </div>
   </a>
@@ -191,7 +470,7 @@
   <div class="box">
     <strong>읽기 전에:</strong> 이 prototype은 사업 모델을 시각화한 가상의 화면입니다. 실제 데이터·실제 제품·실제 가격이 아닙니다. Brand A는 한국 → 미국 K-Beauty 셀러의 전형적 패턴을 익명화한 가상의 케이스이고, 광고비·견적 숫자는 메모에서 정의한 가격 모델에 따라 계산되는 예시입니다.
     <br><br>
-    <strong>회의 진행 방식:</strong> Amazon 스타일 6-pager 메모입니다. 회의 시작 후 10분은 메모를 함께 읽고, 그 다음 메모 6번 섹션(같이 정해야 할 것들)의 Q1–Q5를 토론합니다. Prototype은 그 토론을 도울 보조 자료입니다.
+    <strong>회의 진행 방식:</strong> Amazon 스타일 6-pager 메모입니다. 회의 시작 후 10분은 메모를 함께 읽고, 그 다음 메모 6번 섹션(같이 정해야 할 것들)의 Q1–Q5를 토론합니다. Framework·Agent·Prototype은 그 토론을 도울 보조 자료입니다.
   </div>
 </section>
 
