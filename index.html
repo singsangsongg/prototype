@@ -71,8 +71,11 @@
 
   .v-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 900px) {
+    .v-grid { grid-template-columns: 1fr; }
   }
   .v-card {
     background: var(--color-background-primary);
@@ -165,16 +168,16 @@
   <h1>Retail Media,</h1>
   <h1 class="italic">다시 짜기.</h1>
   <p>
-    한국 → 미국 Amazon에 진출하는 성장기 K-Brand를 위한 새 운영 모델. <strong style="color: var(--color-text-primary); font-weight: 500;">사고가 v1에서 v2로 어떻게 발전했는지</strong>를 같이 보세요. 메모를 먼저 읽고, prototype에서 화면 변화를 비교하시면 됩니다.
+    Brand의 retail media 결과를 만들어내는 새 운영 모델 — <strong style="color: var(--color-text-primary); font-weight: 500;">AI-augmented Account Management 회사</strong>. 사고가 v1 → v2 → v4로 어떻게 발전했는지를 같이 보세요. 메모를 먼저 읽고, prototype에서 비교하시면 됩니다.
   </p>
 </section>
 
-<!-- TWO VERSIONS -->
+<!-- THREE VERSIONS -->
 <section class="versions">
   <div class="versions-head">
     <div class="eyebrow">DOCUMENT & PROTOTYPE</div>
-    <h2>v1 → v2 사고의 변화</h2>
-    <p>v1은 우리 솔루션을 SaaS로 가정한 첫 모델, v2는 v1의 모든 것을 유지하되 실행 layer만 CLI 기반으로 프레임을 바꾼 것입니다. 진단·9개 agent·가격 모델은 그대로, 전달 방식만 다릅니다.</p>
+    <h2>v1 → v2 → v4 사고의 변화</h2>
+    <p>v1은 우리 솔루션을 SaaS로 가정한 첫 모델, v2는 인터페이스만 CLI로 바꾼 버전, <strong style="color: var(--color-text-primary); font-weight: 500;">v4는 narrative를 근본부터 재구성한 최종본</strong>입니다. AM이 직접 agent를 prototype·상용화하는 사이클, 두 트랙(Self-Serve / Managed), 4개 도메인, flywheel까지 모두 들어있습니다.</p>
   </div>
 
   <div class="v-grid">
@@ -184,52 +187,79 @@
       <div class="label">VERSION 1 · 2026.05</div>
       <h3>SaaS 모델</h3>
       <p class="core">
-        브랜드 단계별 진단·처방·실행을 <strong>우리 dashboard 안에서</strong> modular agent로 조립하는 모델. 광고비 $10K–$50K K-Brand 단일 segment에 집중.
+        브랜드 단계별 진단·처방·실행을 <strong>우리 dashboard 안에서</strong> modular agent로 조립하는 모델. 광고비 $10K–$50K K-Brand 단일 segment.
       </p>
       <div class="links">
         <a href="Strategy_Memo_v1.pdf" target="_blank">
           <i class="ti ti-file-text" aria-hidden="true"></i>
-          전략 메모 v1 (PDF · 15분)
+          전략 메모 v1 (PDF)
         </a>
         <a href="v1/screens/screen-1-free.html">
           <i class="ti ti-lock" aria-hidden="true"></i>
-          Prototype v1 · 무료 진단
+          무료 진단
         </a>
         <a href="v1/screens/screen-2-connected.html">
           <i class="ti ti-lock-open" aria-hidden="true"></i>
-          Prototype v1 · 전체 진단
+          전체 진단
         </a>
         <a href="v1/screens/screen-3-quote.html">
           <i class="ti ti-adjustments" aria-hidden="true"></i>
-          Prototype v1 · 견적 만들기
+          견적 만들기
         </a>
       </div>
     </div>
 
     <!-- v2 Card -->
-    <div class="v-card current">
-      <div class="ribbon">CURRENT</div>
+    <div class="v-card">
       <div class="label">VERSION 2 · 2026.05</div>
       <h3>CLI Agent 모델</h3>
       <p class="core">
-        v1의 모든 것을 유지하되, <strong>실행 layer만 바꿈</strong>. SaaS dashboard 대신 <strong>고객 환경에 CLI install</strong>되어 본인 AI 도구(Claude Code 등)에서 자연어로 작동. 같은 진단·9개 agent·가격, 다른 전달 방식.
+        v1의 모든 것을 유지하되, <strong>실행 layer만 바꿈</strong>. SaaS dashboard 대신 <strong>고객 환경에 CLI install</strong>되어 본인 AI 도구에서 자연어로 작동.
       </p>
       <div class="links">
         <a href="Strategy_Memo_v2.pdf" target="_blank">
           <i class="ti ti-file-text" aria-hidden="true"></i>
-          전략 메모 v2 (PDF · 15분)
+          전략 메모 v2 (PDF)
         </a>
         <a href="v2/screens/screen-1-free.html">
           <i class="ti ti-lock" aria-hidden="true"></i>
-          Prototype v2 · 무료 진단
+          무료 진단
         </a>
         <a href="v2/screens/screen-2-connected.html">
           <i class="ti ti-lock-open" aria-hidden="true"></i>
-          Prototype v2 · 전체 진단
+          전체 진단
         </a>
         <a href="v2/screens/screen-3-quote.html">
           <i class="ti ti-adjustments" aria-hidden="true"></i>
-          Prototype v2 · 견적 만들기
+          견적 만들기
+        </a>
+      </div>
+    </div>
+
+    <!-- v4 Card (CURRENT) -->
+    <div class="v-card current">
+      <div class="ribbon">CURRENT</div>
+      <div class="label">VERSION 4 · 2026.05 · 최종</div>
+      <h3>AI-augmented AM 회사</h3>
+      <p class="core">
+        SaaS도 에이전시도 AI 회사도 아님. <strong>AM이 AI·CLI로 새 agent를 직접 prototype·상용화하면서 Brand 결과를 만들어내는 조직</strong>. 두 트랙(Self-Serve / Managed) · 4개 도메인 · flywheel.
+      </p>
+      <div class="links">
+        <a href="Strategy_Memo_v4.pdf" target="_blank">
+          <i class="ti ti-file-text" aria-hidden="true"></i>
+          전략 메모 v4 (PDF · 6-pager)
+        </a>
+        <a href="v4/index.html">
+          <i class="ti ti-layout-dashboard" aria-hidden="true"></i>
+          v4 시각 narrative
+        </a>
+        <a href="v4/index.html#iter">
+          <i class="ti ti-rotate-clockwise-2" aria-hidden="true"></i>
+          이터레이션 다이어그램
+        </a>
+        <a href="v4/index.html#tracks">
+          <i class="ti ti-columns-2" aria-hidden="true"></i>
+          두 트랙 비교
         </a>
       </div>
     </div>
@@ -239,9 +269,11 @@
 
 <section class="note">
   <div class="box">
-    <strong>두 버전을 다 보는 이유:</strong> v1과 v2는 본질·구조·가격 모델이 동일합니다 — 진단·처방·9개 agent·Funnel Matrix·wedge·가격은 그대로입니다. <strong>딱 한 가지가 다릅니다.</strong> v1은 우리 SaaS dashboard에서 운영한다고 가정했고, v2는 Bolta CLI 사례에서 영감을 받아 <strong>고객 환경에 CLI로 install되어 본인 AI 도구로 작동</strong>하도록 프레임을 바꿉니다. 두 prototype의 같은 화면(무료 진단 / 전체 진단 / 견적)을 나란히 비교해보시면 차이가 명확합니다 — 무엇이 같고, 무엇이 바뀌었는지.
+    <strong>세 버전을 다 보는 이유:</strong> 사고의 발전 과정을 보여주기 위함입니다. v1은 SaaS dashboard를 가정한 첫 모델이고, v2는 인터페이스만 CLI로 바꾼 버전입니다. <strong>v4는 narrative를 근본부터 재구성한 최종본</strong>입니다 — "AI-augmented Account Management 회사"라는 사업 정체성, AM이 직접 agent를 prototype·상용화하는 사이클, 두 고객 트랙(Self-Serve / Managed), 4개 도메인(인텔리전스·리스팅·광고·시딩), 고객 성공 기반 flywheel까지. v4가 회의에 쓸 최종본이고, v1·v2는 사고가 어떻게 발전했는지 참고용입니다.
     <br><br>
-    <strong>회의 진행 방식:</strong> Amazon 스타일 6-pager 메모입니다. 회의 시작 후 처음 10–15분은 v2 메모를 함께 읽고, 그 다음 메모 6번 섹션(같이 정해야 할 것들)의 Q1–Q5를 토론합니다. v1은 참고용으로 옆에 두세요.
+    <strong>회의 진행 방식:</strong> Amazon 스타일 6-pager 메모입니다. 회의 시작 후 처음 10–15분은 v4 메모를 함께 읽고, 그 다음 메모 5번 섹션(같이 정해야 할 것들)의 Q1–Q6를 토론합니다. v4 prototype 페이지는 메모의 시각적 요약으로 같이 띄워두면 좋습니다.
+    <br><br>
+    <strong>가격은 모두 예정안</strong>이며 회의에서 확정 필요. Self-Serve $300/$600/$999, Managed 광고비의 명목상 최대 15%는 본인 운영 경험·시장 조사 기반 baseline입니다.
   </div>
 </section>
 
