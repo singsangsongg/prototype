@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>v4 · AI-augmented Account Management 회사</title>
+<title>v4 · AM → AI → CLI → 무한 이터레이션</title>
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="../vendor/tabler/tabler-icons.min.css">
 <style>
@@ -37,6 +37,91 @@
   .v4-h1 em {
     font-style: normal; background: linear-gradient(180deg, transparent 65%, var(--v4-accent-soft) 65%);
     padding: 0 2px;
+  }
+
+  /* HERO ACRONYM */
+  .acronym-stack {
+    display: flex; align-items: baseline; gap: 18px;
+    margin: 8px 0 20px;
+    font-family: var(--v4-serif);
+    font-weight: 500; letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .acronym-stack .term {
+    font-size: 64px; color: var(--v4-ink);
+    position: relative;
+  }
+  .acronym-stack .term::after {
+    content: ""; position: absolute;
+    bottom: 4px; left: 0; right: 0; height: 18px;
+    background: var(--v4-accent-soft); z-index: -1;
+  }
+  .acronym-stack .sep {
+    font-size: 32px; color: var(--v4-ink-light);
+    font-weight: 300; padding-bottom: 6px;
+  }
+  .acronym-meta {
+    display: flex; gap: 22px; margin-top: 14px; margin-bottom: 22px;
+    font-size: 12px; color: var(--v4-ink-light); flex-wrap: wrap;
+  }
+  .acronym-meta strong { color: var(--v4-ink); font-weight: 600; }
+
+  /* HERO FLOW (new — cycle definition) */
+  .flow-hero {
+    margin: 12px 0 28px;
+    position: relative;
+  }
+  .flow-chain {
+    display: grid; grid-template-columns: auto auto auto auto auto auto auto;
+    align-items: center; gap: 10px;
+    font-family: var(--v4-serif);
+    margin-bottom: 14px;
+  }
+  .flow-node {
+    padding: 14px 18px;
+    border: 1px solid var(--v4-ink);
+    border-radius: 10px;
+    background: white;
+    font-size: 17px; font-weight: 500;
+    color: var(--v4-ink); letter-spacing: -0.005em;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .flow-node.flow-start {
+    background: var(--v4-ink); color: white;
+    font-size: 24px; padding: 16px 22px;
+  }
+  .flow-node.flow-end {
+    background: var(--v4-accent-soft);
+    border-color: var(--v4-accent);
+    color: var(--v4-accent);
+  }
+  .flow-arrow {
+    font-size: 22px; color: var(--v4-ink-light);
+    font-weight: 300;
+  }
+  .flow-loop-line {
+    margin-top: 6px;
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 16px;
+    background: var(--v4-warm);
+    border-radius: 999px;
+    font-size: 12px; color: var(--v4-warning);
+    font-weight: 500;
+    width: fit-content;
+  }
+  .flow-loop-line i { font-size: 14px; }
+
+  @media (max-width: 900px) {
+    .flow-chain {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+    .flow-arrow { transform: rotate(90deg); justify-self: center; }
+    .flow-node { white-space: normal; text-align: center; }
+    .flow-node.flow-start { font-size: 20px; }
+    .acronym-stack .term { font-size: 44px; }
+    .acronym-stack { gap: 12px; }
   }
   .v4-h2 {
     font-family: var(--v4-serif); font-size: 24px; line-height: 1.25;
@@ -385,11 +470,29 @@
   <!-- HERO -->
   <section class="v4-section" style="margin-top: 0;">
     <div class="v4-tag">— Version 4 · 최종 narrative</div>
-    <h1 class="v4-h1">
-      우리는 <em>AI-augmented<br>Account Management</em> 회사다.
+
+    <h1 class="v4-h1" style="font-size: 32px; margin-bottom: 22px;">
+      우리는 <em>한 줄의 사이클</em>이다.
     </h1>
+
+    <div class="flow-hero">
+      <div class="flow-chain">
+        <div class="flow-node flow-start">AM</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">AI로 agent<br>생성 · prototype</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">CLI 베이스로<br>제공</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node flow-end">무한<br>이터레이션</div>
+      </div>
+      <div class="flow-loop-line">
+        <i class="ti ti-rotate-clockwise-2"></i>
+        고객 대화·새 패턴이 다시 AM으로 들어와 다음 agent의 baseline이 됨
+      </div>
+    </div>
+
     <p class="v4-lead">
-      SaaS도, 에이전시도, AI 회사도 아니다. <strong style="color: var(--v4-ink); font-weight: 600;">AM이 AI와 CLI로 무장해 새 agent를 직접 prototype하고 상용화하면서, Brand의 retail media 결과를 만들어내는 조직이다.</strong>
+      SaaS도, 에이전시도, AI 회사도 아니다. <strong style="color: var(--v4-ink); font-weight: 600;">AM이 도메인 지식·고객 응대를 담당하고, AI 도구로 새 agent를 만들고, CLI로 고객에게 전달되며, 사이클이 멈추지 않는 한 카탈로그는 계속 진화한다.</strong>
     </p>
     <p class="v4-body">
       이 prototype은 v4 메모의 핵심 narrative를 시각화한 단일 페이지입니다. 회의 참석자가 메모를 읽기 전·후에 같이 보면서 토론할 수 있도록 만들었습니다. <strong>실제 데이터·UI 아님. for internal team alignment only.</strong>
